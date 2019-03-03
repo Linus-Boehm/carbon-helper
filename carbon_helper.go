@@ -10,86 +10,117 @@ var units = map[string]string{"week": "week", "weeks": "week", "day": "day", "da
 type CarbonHelper struct {
 	Carbon *carbon.Carbon
 }
-func New(c *carbon.Carbon) *CarbonHelper{
-	return &CarbonHelper{Carbon:c}
+
+func New(c *carbon.Carbon) *CarbonHelper {
+	return &CarbonHelper{Carbon: c}
 }
 
-func (c *CarbonHelper) Add(unit string, amount int) (*carbon.Carbon, error) {
+func (c *CarbonHelper) Add(unit string, amount int) error {
 	validUnit, ok := units[unit]
 	if !ok {
-		return c.Carbon, errors.New("Unsopported unit: " + unit)
+		return errors.New("Unsopported unit: " + unit)
 	}
 	switch validUnit {
 	case "day":
-		return c.Carbon.AddDays(amount), nil
+		c.Carbon.AddDays(amount)
+		break
 	case "week":
-		return c.Carbon.AddWeeks(amount), nil
+		c.Carbon.AddWeeks(amount)
+		break
 	case "month":
-		return c.Carbon.AddMonths(amount), nil
+		c.Carbon.AddMonths(amount)
+		break
 	case "year":
-		return c.Carbon.AddYears(amount), nil
+		c.Carbon.AddYears(amount)
+		break
 	case "quartal":
-		return c.Carbon.AddQuarters(amount), nil
+		c.Carbon.AddQuarters(amount)
+		break
+	default:
+		return errors.New("Add not implemented for unit: " + unit)
 	}
-	return c.Carbon, errors.New("Add not implemented for unit: " + unit)
+	return nil
+
 }
 
-func (c *CarbonHelper) Sub(unit string, amount int) (*carbon.Carbon, error) {
+func (c *CarbonHelper) Sub(unit string, amount int) error {
 	validUnit, ok := units[unit]
 	if !ok {
-		return c.Carbon, errors.New("Unsopported unit: " + unit)
+		return errors.New("Unsopported unit: " + unit)
 	}
 	switch validUnit {
 	case "day":
-		return c.Carbon.SubDays(amount), nil
+		c.Carbon.SubDays(amount)
+		break
 	case "week":
-		return c.Carbon.SubWeeks(amount), nil
+		c.Carbon.SubWeeks(amount)
+		break
 	case "month":
-		return c.Carbon.SubMonths(amount), nil
+		c.Carbon.SubMonths(amount)
+		break
 	case "year":
-		return c.Carbon.SubYears(amount), nil
+		c.Carbon.SubYears(amount)
+		break
 	case "quartal":
-		return c.Carbon.SubQuarters(amount), nil
+		c.Carbon.SubQuarters(amount)
+		break
+	default:
+		return errors.New("Sub not implemented for unit: " + unit)
 	}
-	return c.Carbon, errors.New("Sub not implemented for unit: " + unit)
+	return nil
+
 }
 
-func (c *CarbonHelper) StartOf(unit string) (*carbon.Carbon, error) {
+func (c *CarbonHelper) StartOf(unit string) error{
 	validUnit, ok := units[unit]
 	if !ok {
-		return c.Carbon, errors.New("Unsopported unit: " + unit)
+		return errors.New("Unsopported unit: " + unit)
 	}
 	switch validUnit {
 	case "day":
-		return c.Carbon.StartOfDay(), nil
+		c.Carbon.StartOfDay()
+		break
 	case "week":
-		return c.Carbon.StartOfDay(), nil
+		c.Carbon.StartOfDay()
+		break
 	case "month":
-		return c.Carbon.StartOfMonth(), nil
+		c.Carbon.StartOfMonth()
+		break
 	case "year":
-		return c.Carbon.StartOfYear(), nil
+		c.Carbon.StartOfYear()
+		break
 	case "quarter":
-		return c.Carbon.StartOfQuarter(), nil
+		c.Carbon.StartOfQuarter()
+		break
+	default:
+		return errors.New("StartOf not implemented for unit: " + unit)
 	}
-	return c.Carbon, errors.New("StartOf not implemented for unit: " + unit)
+	return nil
 }
 
-func (c *CarbonHelper) EndOf(unit string) (*carbon.Carbon, error) {
+func (c *CarbonHelper) EndOf(unit string) error {
 	validUnit, ok := units[unit]
 	if !ok {
-		return c.Carbon, errors.New("Unsopported unit: " + unit)
+		return errors.New("Unsopported unit: " + unit)
 	}
 	switch validUnit {
 	case "day":
-		return c.Carbon.EndOfDay(), nil
+		c.Carbon.EndOfDay()
+		break
 	case "week":
-		return c.Carbon.EndOfDay(), nil
+		c.Carbon.EndOfDay()
+		break
 	case "month":
-		return c.Carbon.EndOfMonth(), nil
+		c.Carbon.EndOfMonth()
+		break
 	case "year":
-		return c.Carbon.EndOfYear(), nil
+		c.Carbon.EndOfYear()
+		break
 	case "quarter":
-		return c.Carbon.EndOfQuarter(), nil
+		c.Carbon.EndOfQuarter()
+		break
+	default:
+		return errors.New("EndOf not implemented for unit: " + unit)
 	}
-	return c.Carbon, errors.New("EndOf not implemented for unit: " + unit)
+	return nil
 }
