@@ -10,6 +10,9 @@ var units = map[string]string{"week": "week", "weeks": "week", "day": "day", "da
 type CarbonHelper struct {
 	Carbon *carbon.Carbon
 }
+func New(c *carbon.Carbon) *CarbonHelper{
+	return &CarbonHelper{Carbon:c}
+}
 
 func (c *CarbonHelper) Add(unit string, amount int) (*carbon.Carbon, error) {
 	validUnit, ok := units[unit]
