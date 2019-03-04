@@ -30,7 +30,7 @@ func (c *CarbonHelper) Add(unit string, amount int) *CarbonHelper {
 	case "year":
 		c.Carbon = c.Carbon.AddYears(amount)
 		break
-	case "quartal":
+	case "quarter":
 		c.Carbon = c.Carbon.AddQuarters(amount)
 		break
 	}
@@ -54,7 +54,7 @@ func (c *CarbonHelper) Sub(unit string, amount int) *CarbonHelper {
 	case "year":
 		c.Carbon = c.Carbon.SubYears(amount)
 		break
-	case "quartal":
+	case "quarter":
 		c.Carbon = c.Carbon.SubQuarters(amount)
 		break
 	}
