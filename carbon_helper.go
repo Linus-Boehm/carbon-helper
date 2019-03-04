@@ -1,7 +1,6 @@
 package carbon_helper
 
 import (
-	"errors"
 	"github.com/uniplaces/carbon"
 )
 
@@ -15,11 +14,9 @@ func New(c *carbon.Carbon) *CarbonHelper {
 	return &CarbonHelper{Carbon: c}
 }
 
-func (c *CarbonHelper) Add(unit string, amount int) error {
-	validUnit, ok := units[unit]
-	if !ok {
-		return errors.New("Unsopported unit: " + unit)
-	}
+func (c *CarbonHelper) Add(unit string, amount int) *CarbonHelper {
+	validUnit := units[unit]
+
 	switch validUnit {
 	case "day":
 		c.Carbon = c.Carbon.AddDays(amount)
@@ -36,18 +33,14 @@ func (c *CarbonHelper) Add(unit string, amount int) error {
 	case "quartal":
 		c.Carbon = c.Carbon.AddQuarters(amount)
 		break
-	default:
-		return errors.New("Add not implemented for unit: " + unit)
 	}
-	return nil
+	return c
 
 }
 
-func (c *CarbonHelper) Sub(unit string, amount int) error {
-	validUnit, ok := units[unit]
-	if !ok {
-		return errors.New("Unsopported unit: " + unit)
-	}
+func (c *CarbonHelper) Sub(unit string, amount int) *CarbonHelper {
+	validUnit := units[unit]
+
 	switch validUnit {
 	case "day":
 		c.Carbon = c.Carbon.SubDays(amount)
@@ -64,18 +57,14 @@ func (c *CarbonHelper) Sub(unit string, amount int) error {
 	case "quartal":
 		c.Carbon = c.Carbon.SubQuarters(amount)
 		break
-	default:
-		return errors.New("Sub not implemented for unit: " + unit)
 	}
-	return nil
+	return c
 
 }
 
-func (c *CarbonHelper) StartOf(unit string) error {
-	validUnit, ok := units[unit]
-	if !ok {
-		return errors.New("Unsopported unit: " + unit)
-	}
+func (c *CarbonHelper) StartOf(unit string) *CarbonHelper {
+	validUnit := units[unit]
+
 	switch validUnit {
 	case "day":
 		c.Carbon = c.Carbon.StartOfDay()
@@ -92,17 +81,12 @@ func (c *CarbonHelper) StartOf(unit string) error {
 	case "quarter":
 		c.Carbon = c.Carbon.StartOfQuarter()
 		break
-	default:
-		return errors.New("StartOf not implemented for unit: " + unit)
 	}
-	return nil
+	return c
 }
 
-func (c *CarbonHelper) EndOf(unit string) error {
-	validUnit, ok := units[unit]
-	if !ok {
-		return errors.New("Unsopported unit: " + unit)
-	}
+func (c *CarbonHelper) EndOf(unit string) *CarbonHelper {
+	validUnit := units[unit]
 	switch validUnit {
 	case "day":
 		c.Carbon = c.Carbon.EndOfDay()
@@ -119,8 +103,6 @@ func (c *CarbonHelper) EndOf(unit string) error {
 	case "quarter":
 		c.Carbon = c.Carbon.EndOfQuarter()
 		break
-	default:
-		return errors.New("EndOf not implemented for unit: " + unit)
 	}
-	return nil
+	return c
 }
